@@ -4,6 +4,7 @@ class MapTile(object):
 	def __init__(self, x, y):
 		self.x = x
 		self.y = y
+		self.been_entered = False
 
 	def intro_text(self):
 		raise NotImplementedError()
@@ -33,14 +34,21 @@ class MapTile(object):
 			
 class StartingRoom(MapTile):
 	def intro_text(self):
-		return """
-		You find yourself in a cave with a flickering torch on the wall.
-		You can make out four paths, each equally dark and foreboding.
-		"""
+		if self.been_entered == False:
+			return """
+			You find yourself in a cave with a flickering torch on the wall.
+			You can make out four paths, each equally dark and foreboding.
+			"""
+		else:
+			return """
+			You feel like you've been here before.
+			This looks just like the room you started in.
+			"""
 
 	def modify_player(self, player):
 		# Room has no action on the player
-		pass
+		# pass
+		self.been_entered = True
 
 class LootRoom(MapTile):
 	def __init__(self, x, y, item):
@@ -52,6 +60,9 @@ class LootRoom(MapTile):
 
 	def modify_player(self, player):
 		self.add_loot(player)
+		
+	def has_loot(self, player):
+		return 
 
 class EnemyRoom(MapTile):
 	def __init__(self, x, y, enemy):

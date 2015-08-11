@@ -1,4 +1,4 @@
-import items, world
+import items, world, random
 
 class Player(object):
 	inventory = [items.Gold(15), items.Rock()]
