@@ -47,8 +47,10 @@ class StartingRoom(MapTile):
 
 	def modify_player(self, player):
 		# Room has no action on the player
-		# pass
-		self.been_entered = True
+		if self.been_entered == False:
+			self.been_entered = True
+		else:
+			pass
 
 class LootRoom(MapTile):
 	def __init__(self, x, y, item):
@@ -59,11 +61,12 @@ class LootRoom(MapTile):
 		player.inventory.append(self.item)
 
 	def modify_player(self, player):
-		self.add_loot(player)
+		if self.been_entered == False:
+			self.add_loot(player)
+			self.been_entered = True
+		else:
+			pass
 		
-	def has_loot(self, player):
-		return 
-
 class EnemyRoom(MapTile):
 	def __init__(self, x, y, enemy):
 		self.enemy = enemy
@@ -123,10 +126,17 @@ class FindDaggerRoom(LootRoom):
 		super(FindDaggerRoom, self).__init__(x, y, items.Dagger())
 
 	def intro_text(self):
-		return """
-		You notice something shiny in the corner.
-		It's a dagger! You pick it up.
-		"""
+		if self.been_entered == False:
+			return """
+			You notice something shiny on the table in the corner.
+			It's a dagger! You pick it up.
+			"""
+		else:
+			return """
+			The table in the corner of this room 
+			has a distinct outline in the dust layer.
+			You've found everything interesting here already.
+			"""
 
 class Find5GoldRoom(LootRoom):
 	def __init__(self, x, y):
@@ -139,10 +149,16 @@ class Find5GoldRoom(LootRoom):
 		# print(player.inventory[0].amt)
 
 	def intro_text(self):
-		return """
-		You notice a small pile of shinies strewn about a table near the door.
-		You found 5 Gold! Congrats!
-		"""	
+		if self.been_entered == False:
+			return """
+			You notice a small pile of shinies strewn about a table near the door.
+			You found 5 Gold! Congrats!
+			"""	
+		else:
+			return """
+			You've already picked this room clean of Gold.
+			Carry on, there's nothing to see here.
+			"""
 		
 class LeaveCaveRoom(MapTile):
 	def intro_text(self):

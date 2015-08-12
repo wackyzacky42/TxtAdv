@@ -12,11 +12,11 @@ def load_tiles():
 			tile_name = cols[x].replace('\n', '') # Windows users may need to replace '\r\n'
 			_world[(x, y)] = None if tile_name == '' else getattr(__import__('tiles'), tile_name)(x, y)
 			# if tile_name == '':
-				# _world[(x, y)] = None
+				#_world[(x, y)] = None
 			# # else:
 				# # _world[(x, y)] = (tile_name + "()")
 			# else:
-				# _world[(x, y)] = getattr(tiles, "tile_name")
+				#_world[(x, y)] = getattr(__import__('tiles'), tile_name)
 
 def tile_exists(x, y):
 	return _world.get((x, y))
