@@ -1,4 +1,4 @@
-import world, tiles
+import world, tiles, map
 from player import Player
 
 
@@ -18,6 +18,7 @@ def play():
 		# Calls the modify_player() method from the room the player is currently in.
 		# This applies whatever room effect will hit the player, if any.
 		room.modify_player(player)
+		map.update_map()
 		# Check the While conditions again in case the modify_player() method killed the player
 		# or caused them to win.
 		if player.is_alive() and not player.victory:
