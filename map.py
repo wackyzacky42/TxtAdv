@@ -1,10 +1,15 @@
-import world, tiles
+from __future__ import print_function
 from operator import itemgetter
+import world, tiles
+
+
 
 def update_map():
-	map_grid = world._world
-	# print(map_grid)
-	for (x, y), tile in map_grid.iteritems():
+	# map_grid = world._world
+	map_copy = world._world
+	map_grid = []
+	# for (x, y), tile in map_grid.iteritems():
+	for (x, y), tile in world._world.iteritems():
 		# Run through all entries in _world and replace room names with blank squares or known squares
 		if tile == None:
 			tile = "   "
@@ -12,12 +17,21 @@ def update_map():
 			tile = "[ ]"
 		else:
 			tile = "   "
-		map_grid[(x, y)] = tile
-	# print map_grid
+		map_grid.append((x, y, tile))
+	map_grid = sorted(map_grid, key = itemgetter(1, 0))
+	print(map_grid)
+
+	# map_grid = sorted(map_grid.items(), key = itemgetter((1, 0),1))
 	
-	# print(map_grid.items())
-	map_grid = sorted(map_grid.items(), key = itemgetter(0,1))
-	# print map_grid
+	
+	# x_new = 0
+	# y_new = 0
+
+	# for (x, y), tile in map_grid:
+		# x_new = y
+		# y_new = x
+		# map_grid[(x, y), tile] = (x_new, y_new), tile
+	
 	# print (sorted(map_grid, key = itemgetter(0, 1)))
 	return map_grid
 	
@@ -25,25 +39,25 @@ def print_map():
 	map_grid = update_map()
 	cols_amt = 0
 	rows_amt = 0
-	print(cols_amt)
 	
-	for (x, y), tiles in map_grid:
-		if x < 1:
+	for (x, y, tile) in map_grid:
+		if y < 1:
+			cols_amt += 1
 			print(cols_amt)
 		else:
 			pass
-		cols_amt += 1
 	
-	for (x, y), tile in map_grid:
-		for x in range(cols_amt):
-			if x == cols_amt:
-				print (tile)
-				x += 1
-			else:
-				print (tile),
-	
-	# for x in range((cols_amt)):
-		# print(map_grid[(),
+	x_count = 1
+	loops = 1
+	for (x, y, tile) in map_grid:
+		if (x_count/loops) == cols_amt:
+			print(tile)
+			x_count += 1
+			loops += 1
+		else:
+			print(tile, sep = '', end = '')
+			x_count += 1
+
 		
 # create a blank grid based on the dimensions of _world
 # check all the tile for the been_entered flag
