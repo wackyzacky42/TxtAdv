@@ -21,6 +21,8 @@ def update_map():
 	map_grid = sorted(map_grid, key = itemgetter(1, 0))
 	print(map_grid)
 
+# adding new stuff!!
+
 	# map_grid = sorted(map_grid.items(), key = itemgetter((1, 0),1))
 	
 	

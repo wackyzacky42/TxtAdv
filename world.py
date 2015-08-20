@@ -1,6 +1,7 @@
 # Creates a dictionary "_world"  variable that will hold all the coordinates and room names of the map.
 _world = {}
 
+# test!
 
 def load_tiles():
 	"""Parses a file that describes the world space into the _world object"""
