@@ -1,6 +1,6 @@
 from __future__ import print_function
 from operator import itemgetter
-import world, tiles
+import world, tiles, game
 
 
 
@@ -15,11 +15,13 @@ def update_map():
 			tile = "   "
 		elif tile.been_entered == True:
 			tile = "[ ]"
+		#elif (tile.x, tile.y) == (player_one.location_x, player_one.location_y):
+			#tile = "[x]"
 		else:
 			tile = "   "
 		map_grid.append((x, y, tile))
 	map_grid = sorted(map_grid, key = itemgetter(1, 0))
-	print(map_grid)
+	# print(map_grid)
 
 # adding new stuff!!
 
@@ -45,7 +47,6 @@ def print_map():
 	for (x, y, tile) in map_grid:
 		if y < 1:
 			cols_amt += 1
-			print(cols_amt)
 		else:
 			pass
 	

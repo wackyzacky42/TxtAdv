@@ -29,6 +29,7 @@ class MapTile(object):
 		"""Returns all of the available actions in this room"""
 		moves = self.adjacent_moves()
 		moves.append(actions.ViewInventory())
+		moves.append(actions.ViewMap())
 		
 		return moves
 			
@@ -76,12 +77,18 @@ class EnemyRoom(MapTile):
 		if self.enemy.is_alive():
 			the_player.hp = the_player.hp - self.enemy.damage
 			print ("%s does %s damage. You have %s HP remaining.\n\n" % (self.enemy.name, self.enemy.damage, the_player.hp))
+		
+		if self.been_entered == False:
+			self.been_entered = True
+		else:
+			pass
 			
 	def available_actions(self):
 		if self.enemy.is_alive():
 			return [actions.Flee(tile = self), actions.Attack(enemy = self.enemy)]
 		else:
-			return self.adjacent_moves()
+			# return self.adjacent_moves()
+			return super(EnemyRoom, self).available_actions()
 
 class EmptyCavePath(MapTile):
 	def intro_text(self):
@@ -90,8 +97,10 @@ class EmptyCavePath(MapTile):
 		"""
 
 	def modify_player(self, player):
-		# Room has no action on the player
-		pass
+		if self.been_entered == False:
+			self.been_entered = True
+		else:
+			pass
 
 class GiantSpiderRoom(EnemyRoom):
 	def __init__(self, x, y):
@@ -170,4 +179,10 @@ class LeaveCaveRoom(MapTile):
 		"""
 		
 	def modify_player(self, player):
+		if self.been_entered == False:
+			self.been_entered = True
+		else:
+			pass
+			
 		player.victory = True
+		

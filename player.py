@@ -1,4 +1,4 @@
-import items, world, random
+import items, world, random, map
 
 class Player(object):
 	inventory = [items.Gold(15), items.Rock()]
@@ -60,3 +60,6 @@ class Player(object):
 		available_moves = tile.adjacent_moves()
 		r = random.randint(0, len(available_moves) - 1)
 		self.do_action(available_moves[r])
+		
+	def print_map(self):
+		map.print_map()
