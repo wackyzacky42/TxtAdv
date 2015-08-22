@@ -1,3 +1,5 @@
+import tiles
+
 # Creates a dictionary "_world"  variable that will hold all the coordinates and room names of the map.
 _world = {}
 

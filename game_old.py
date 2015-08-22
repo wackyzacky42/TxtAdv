@@ -1,7 +1,5 @@
 import world, tiles, player
 
-# global player_one
-# player_one = player.Player()
 
 def play():
 	# Calls the load_tiles() method from the world module, creating the game grid.

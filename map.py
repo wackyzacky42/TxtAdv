@@ -1,7 +1,6 @@
 from __future__ import print_function
 from operator import itemgetter
-import world, tiles, game
-
+import world, tiles, player
 
 
 def update_map():
@@ -13,10 +12,10 @@ def update_map():
 		# Run through all entries in _world and replace room names with blank squares or known squares
 		if tile == None:
 			tile = "   "
+		#elif (tile.x, tile.y) == (game.player_one.location_x, game.player_one.location_y):
+			#tile = "[x]"
 		elif tile.been_entered == True:
 			tile = "[ ]"
-		#elif (tile.x, tile.y) == (player_one.location_x, player_one.location_y):
-			#tile = "[x]"
 		else:
 			tile = "   "
 		map_grid.append((x, y, tile))
