@@ -1,8 +1,5 @@
 import world, tiles, player
 
-# global player_one
-# player_one = player.Player()
-
 def play():
 	# Calls the load_tiles() method from the world module, creating the game grid.
 	world.load_tiles()
@@ -11,6 +8,7 @@ def play():
 	# Finds the name of the room at the player's starting location and assigns it to the variable "room".
 	room = world.tile_exists(player_one.location_x, player_one.location_y)
 	# Prints the intro text for the player's starting room.
+	player_one.print_map(player_one.location_x, player_one.location_y)
 	print(room.intro_text())
 	# Repeats the game loop as long as the player is alive and hasn't won.
 	while player_one.is_alive() and not player_one.victory:

@@ -1,3 +1,4 @@
+from __future__ import print_function
 import items, world, random, map
 
 class Player(object):
@@ -19,6 +20,7 @@ class Player(object):
 	def move(self, dx, dy):
 		self.location_x += dx
 		self.location_y += dy
+		self.print_map(self.location_x, self.location_y)
 		print(world.tile_exists(self.location_x, self.location_y,).intro_text())
 		
 	def move_north(self):
@@ -41,7 +43,7 @@ class Player(object):
 				if i.damage > max_dmg:
 					max_dmg = i.damage
 					best_weapon = i
-					
+		self.print_map(self.location_x, self.location_y)			
 		print("\n\nYou use %s against %s!" % (best_weapon.name, enemy.name))
 		enemy.hp -= best_weapon.damage
 		if not enemy.is_alive():
@@ -61,5 +63,26 @@ class Player(object):
 		r = random.randint(0, len(available_moves) - 1)
 		self.do_action(available_moves[r])
 		
-	def print_map(self):
-		map.print_map()
+	def print_map(self, location_x, location_y):
+		#map.print_map(location_x, location_y)
+		print(self.location_x, self.location_y)
+		map_grid = map.update_map(location_x, location_y)
+		cols_amt = 0
+		rows_amt = 0
+	
+		for (x, y, tile) in map_grid:
+			if y < 1:
+				cols_amt += 1
+			else:
+				pass
+	
+		x_count = 1
+		loops = 1
+		for (x, y, tile) in map_grid:
+			if (x_count/loops) == cols_amt:
+				print(tile)
+				x_count += 1
+				loops += 1
+			else:
+				print(tile, sep = '', end = '')
+				x_count += 1

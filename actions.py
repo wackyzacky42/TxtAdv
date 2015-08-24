@@ -32,9 +32,9 @@ class ViewInventory(Action):
 		super(ViewInventory, self).__init__(method = Player.print_inventory, name = "View inventory", hotkey = 'i')
 		
 class ViewMap(Action):
-	"""Prints out the portion of the map the player has previouly explored"""
-	def __init__(self):
-		super(ViewMap, self).__init__(method = Player.print_map, name = "View map", hotkey = 'm')
+	"""Prints out the portion of the map the player has previously explored"""
+	def __init__(self, location_x, location_y):
+		super(ViewMap, self).__init__(method = Player.print_map, name = "View map", hotkey = 'm', location_x = location_x, location_y = location_y)
 		
 class Attack(Action):
 	def __init__(self, enemy):

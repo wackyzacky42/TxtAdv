@@ -3,7 +3,7 @@ from operator import itemgetter
 import world, tiles, player
 
 
-def update_map():
+def update_map(location_x, location_y):
 	# map_grid = world._world
 	map_copy = world._world
 	map_grid = []
@@ -12,8 +12,8 @@ def update_map():
 		# Run through all entries in _world and replace room names with blank squares or known squares
 		if tile == None:
 			tile = "   "
-		#elif (tile.x, tile.y) == (game.player_one.location_x, game.player_one.location_y):
-			#tile = "[x]"
+		elif (tile.x, tile.y) == (location_x, location_y):
+			tile = "[x]"
 		elif tile.been_entered == True:
 			tile = "[ ]"
 		else:
@@ -38,8 +38,8 @@ def update_map():
 	# print (sorted(map_grid, key = itemgetter(0, 1)))
 	return map_grid
 	
-def print_map():
-	map_grid = update_map()
+def print_map(location_x, location_y):
+	map_grid = update_map(location_x, location_y)
 	cols_amt = 0
 	rows_amt = 0
 	
