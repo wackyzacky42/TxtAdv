@@ -64,25 +64,41 @@ class Player(object):
 		self.do_action(available_moves[r])
 		
 	def print_map(self, location_x, location_y):
-		#map.print_map(location_x, location_y)
-		print(self.location_x, self.location_y)
 		map_grid = map.update_map(location_x, location_y)
 		cols_amt = 0
 		rows_amt = 0
-	
+		
+		for (x, y, tile) in map_grid:
+			if x < 1:
+				rows_amt += 1
+
 		for (x, y, tile) in map_grid:
 			if y < 1:
 				cols_amt += 1
-			else:
-				pass
+		
+		print (" ", sep = '', end = '')	
+		for x in range(cols_amt):
+			print("---", sep = '', end = '')
+		print("")
+		print("|", sep = '', end = '')
 	
 		x_count = 1
 		loops = 1
 		for (x, y, tile) in map_grid:
 			if (x_count/loops) == cols_amt:
-				print(tile)
+				print(tile, sep = '', end = '')
+				print("|")
+				if loops == rows_amt:
+					pass
+				else:
+					print("|", sep = '', end = '')
 				x_count += 1
 				loops += 1
 			else:
 				print(tile, sep = '', end = '')
 				x_count += 1
+		
+		print (" ", sep = '', end = '')		
+		for x in range(cols_amt):
+			print("---", sep = '', end = '')
+		print("")
