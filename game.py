@@ -1,4 +1,4 @@
-import world, tiles, player
+import world, tiles, player, os
 
 def play():
 	# Calls the load_tiles() method from the world module, creating the game grid.
@@ -8,6 +8,7 @@ def play():
 	# Finds the name of the room at the player's starting location and assigns it to the variable "room".
 	room = world.tile_exists(player_one.location_x, player_one.location_y)
 	# Prints the intro text for the player's starting room.
+	# os.system('cls')
 	player_one.print_map(player_one.location_x, player_one.location_y)
 	print(room.intro_text())
 	# Repeats the game loop as long as the player is alive and hasn't won.
@@ -17,7 +18,6 @@ def play():
 		# Calls the modify_player() method from the room the player is currently in.
 		# This applies whatever room effect will hit the player, if any.
 		room.modify_player(player_one)
-		# map.print_map()
 		# Check the While conditions again in case the modify_player() method killed the player
 		# or caused them to win.
 		if player_one.is_alive() and not player_one.victory:

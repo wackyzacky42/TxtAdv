@@ -1,5 +1,5 @@
 from __future__ import print_function
-import items, world, random, map
+import items, world, random, map, os
 
 class Player(object):
 	inventory = [items.Gold(15), items.Rock()]
@@ -20,8 +20,8 @@ class Player(object):
 	def move(self, dx, dy):
 		self.location_x += dx
 		self.location_y += dy
-		self.print_map(self.location_x, self.location_y)
-		print(world.tile_exists(self.location_x, self.location_y,).intro_text())
+		# self.print_map(self.location_x, self.location_y)
+		# print(world.tile_exists(self.location_x, self.location_y,).intro_text())
 		
 	def move_north(self):
 		self.move(dx = 0, dy = -1)
@@ -64,6 +64,7 @@ class Player(object):
 		self.do_action(available_moves[r])
 		
 	def print_map(self, location_x, location_y):
+		# os.system('cls')
 		map_grid = map.update_map(location_x, location_y)
 		cols_amt = 0
 		rows_amt = 0
@@ -102,3 +103,4 @@ class Player(object):
 		for x in range(cols_amt):
 			print("---", sep = '', end = '')
 		print("")
+		print("[ ] = Explored room\n[x] = Current location")
